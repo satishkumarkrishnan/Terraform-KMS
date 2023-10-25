@@ -36,8 +36,8 @@ resource "aws_s3_bucket_public_access_block" "public_access" {
 }
 # Upload TF state file to S3 bucket
 resource "aws_s3_object" "object" {
-  bucket = "tokyo-tf-state-poc"
-  key    = "terraform.tfstate" # Object name
+  bucket = "tokyo-tf-kms"
+  key    = "README.md" # Object name
   source = "./README.md"
   lifecycle {
     prevent_destroy = false
