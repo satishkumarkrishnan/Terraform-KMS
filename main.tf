@@ -17,7 +17,7 @@ resource "aws_kms_key" "tokyo_kms_key" {
 }
 
 #To create KMS Policy 
-/*resource "aws_kms_key_policy" "tokyo_kms_key_policy" {
+resource "aws_kms_key_policy" "tokyo_kms_key_policy" {
   key_id = aws_kms_key.tokyo_kms_key.arn
   policy = jsonencode({
     Id = "KMS policy"
@@ -26,7 +26,7 @@ resource "aws_kms_key" "tokyo_kms_key" {
         Action = "kms:*"
         Effect = "Allow"
         Principal = {
-          AWS = "*"
+          AWS = "arn:aws:iam::515149434592:user/satish_Terraform_poc"
         }
 
         Resource = "*"
@@ -35,4 +35,4 @@ resource "aws_kms_key" "tokyo_kms_key" {
     ]
     Version = "2012-10-17"
   })
-}*/
+}
