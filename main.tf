@@ -12,8 +12,8 @@ terraform {
 resource "aws_kms_key" "tokyo_kms_key" {
   description             = "KMS key for Tokyo"
   deletion_window_in_days = 10
-  key_usage               = "ENCRYPT_DECRYPT"
-  enable_key_rotation     = true
+#  key_usage               = "ENCRYPT_DECRYPT"
+#  enable_key_rotation     = true
 }
 
 #To create KMS Policy 
