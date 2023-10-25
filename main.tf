@@ -29,7 +29,7 @@ resource "aws_kms_key_policy" "tokyo_kms_key_policy" {
           AWS = "arn:aws:iam::515149434592:user/satish_Terraform_poc"
         }
 
-        Resource = "S3 "
+        Resource = "* "
         Sid      = "Enable IAM User Permissions"
       },
     ]
