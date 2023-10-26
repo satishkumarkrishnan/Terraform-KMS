@@ -12,8 +12,8 @@ terraform {
 resource "aws_kms_key" "tokyo_kms_key" {
   description             = "KMS key for Tokyo"
   deletion_window_in_days = 10
-#  key_usage               = "ENCRYPT_DECRYPT"
-#  enable_key_rotation     = true
+  key_usage               = "ENCRYPT_DECRYPT"
+  enable_key_rotation     = true
 }
 
 #To create KMS Policy 
@@ -26,7 +26,7 @@ resource "aws_kms_key_policy" "tokyo_kms_key_policy" {
         Action = "kms:*"
         Effect = "Allow"
         Principal = {
-          AWS = "arn:aws:iam::515149434592:user/satish_Terraform_poc"
+          AWS: !Join [ "", [ "arn:aws:iam::", !Ref "AWS::AccountId", ":root" ] ]
         }
 
         Resource = "* "
