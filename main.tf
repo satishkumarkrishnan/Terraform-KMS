@@ -28,8 +28,9 @@ resource "aws_kms_alias" "tokyo_kms_key_alias" {
 resource "aws_kms_key_policy" "tokyo_kms_key_policy" {
   key_id = aws_kms_key.tokyo_kms_key.arn
   policy = jsonencode({
-    Id = "KMS policy"
-    Statement = [
+    "Version" = "2012-10-17"
+    "Id" = "KMS policy"
+    "Statement" = [
      {
             "Sid": "Enable IAM User Permissions",
             "Effect": "Allow",
@@ -42,7 +43,7 @@ resource "aws_kms_key_policy" "tokyo_kms_key_policy" {
         {
             "Effect": "Allow",
             "Principal": {
-                "Service": "logs.region.amazonaws.com"
+                "Service": "logs.ap-northeast-1.amazonaws.com"
             },
             "Action": [
                 "kms:Encrypt*",
@@ -59,6 +60,6 @@ resource "aws_kms_key_policy" "tokyo_kms_key_policy" {
             }
         }    
     ]
-    Version = "2012-10-17"
+   
   })
 }
