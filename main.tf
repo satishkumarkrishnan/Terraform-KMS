@@ -21,7 +21,7 @@ resource "aws_kms_key" "tokyo_kms_key" {
 
 #To create KMS Policy 
 resource "aws_kms_key_policy" "tokyo_kms_key_policy" {
-  key_id = aws_kms_key.tokyo_kms_key.arn
+  key_id = aws_kms_key_policy.tokyo_kms_key_policy.key_id
   policy = jsonencode({
     Id = "KMS policy"
     Statement = [
