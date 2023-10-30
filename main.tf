@@ -14,6 +14,9 @@ resource "aws_kms_key" "tokyo_kms_key" {
   deletion_window_in_days = 10
   key_usage               = "ENCRYPT_DECRYPT"
   enable_key_rotation     = true
+  tags = {
+    Name = "tokyo_kms_key"    
+  }
 }
 
 #To create KMS Policy 
