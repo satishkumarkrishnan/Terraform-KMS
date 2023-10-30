@@ -50,7 +50,7 @@ resource "aws_kms_key_policy" "tokyo_kms_key_policy" {
             "Resource": "*",
             "Condition": {
                 "ArnLike": {
-                    "kms:EncryptionContext:aws:logs:arn": "arn:aws:logs:ap-northeast-1:515149434592:log-group:tokyo_cw:*"                    
+                    "kms:EncryptionContext:aws:logs:arn": "arn:aws:logs:ap-northeast-1:515149434592:log-group:tokyo_cw:*"                                     
                 }
             }
         }    
