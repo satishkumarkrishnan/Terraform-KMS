@@ -35,6 +35,25 @@ resource "aws_kms_key_policy" "tokyo_kms_key_policy" {
         Resource = "*"
         Sid      = "Enable IAM User Permissions"
       },
+      {
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "logs.ap-northeast-1.amazonaws.com"
+            },
+            "Action": [
+                "kms:Encrypt*",
+                "kms:Decrypt*",
+                "kms:ReEncrypt*",
+                "kms:GenerateDataKey*",
+                "kms:Describe*"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "ArnLike": {
+                    "kms:EncryptionContext:aws:logs:arn": "arn:aws:logs:ap-northeast-1:297200899628:*"
+                }
+            }
+        }    
     ]
     Version = "2012-10-17"
   })
