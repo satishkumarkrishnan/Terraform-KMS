@@ -18,6 +18,11 @@ resource "aws_kms_key" "tokyo_kms_key" {
     Name = "tokyo_kms_key"    
   }
 }
+#To create KMS Alias
+resource "aws_kms_alias" "tokyo_kms_key_alias" {
+  name          = "alias/cloud-watch-test"
+  target_key_id = aws_kms_key.tokyo_kms_key.key_id
+}
 
 #To create KMS Policy 
 resource "aws_kms_key_policy" "tokyo_kms_key_policy" {
@@ -25,20 +30,19 @@ resource "aws_kms_key_policy" "tokyo_kms_key_policy" {
   policy = jsonencode({
     Id = "KMS policy"
     Statement = [
-      {
-        Action = "kms:*"
-        Effect = "Allow"
-        Principal = {
-          AWS = "arn:aws:iam::515149434592:root"
-        }
-
-        Resource = "*"
-        Sid      = "Enable IAM User Permissions"
-      },
-      {
+     {
+            "Sid": "Enable IAM User Permissions",
             "Effect": "Allow",
             "Principal": {
-                "Service": "logs.ap-northeast-1.amazonaws.com"
+                "AWS": "arn:aws:iam::515149434592:root"
+            },
+            "Action": "kms:*",
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "logs.region.amazonaws.com"
             },
             "Action": [
                 "kms:Encrypt*",
@@ -50,7 +54,7 @@ resource "aws_kms_key_policy" "tokyo_kms_key_policy" {
             "Resource": "*",
             "Condition": {
                 "ArnLike": {
-                    "kms:EncryptionContext:aws:logs:arn": "arn:aws:logs:ap-northeast-1:515149434592:log-group:tokyo_cw:*"                                     
+                    "kms:EncryptionContext:aws:logs:arn": "arn:aws:logs:ap-northeast-1:515149434592:*"
                 }
             }
         }    
