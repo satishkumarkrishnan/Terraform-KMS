@@ -25,7 +25,7 @@ resource "aws_kms_alias" "tokyo_kms_key_alias" {
 }
 
 #To create KMS Policy 
-/*resource "aws_kms_key_policy" "tokyo_kms_key_policy" {
+resource "aws_kms_key_policy" "tokyo_kms_key_policy" {
   key_id = aws_kms_key.tokyo_kms_key.arn
   policy = jsonencode({
     "Version" = "2012-10-17"
@@ -62,4 +62,4 @@ resource "aws_kms_alias" "tokyo_kms_key_alias" {
     ]
    
   })
-}*/
+}
