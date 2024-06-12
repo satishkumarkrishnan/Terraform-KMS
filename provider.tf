@@ -1,9 +1,9 @@
 terraform {
   cloud {
-    organization = "Satish_Terraform"
+    organization = "CG_Tokyo"
 
     workspaces {
-      name = "Terraform_Final"
+      name = ""
     }
   }
 }
