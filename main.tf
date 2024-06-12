@@ -35,7 +35,7 @@ resource "aws_kms_key_policy" "tokyo_kms_key_policy" {
             "Sid": "Enable IAM User Permissions",
             "Effect": "Allow",
             "Principal": {
-                "AWS": "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
+                "AWS": "arn:aws:iam::590183849298:root"
             },
             "Action": "kms:*",
             "Resource": "*"
@@ -55,7 +55,7 @@ resource "aws_kms_key_policy" "tokyo_kms_key_policy" {
             "Resource": "*",
             "Condition": {
                 "ArnLike": {
-                    "kms:EncryptionContext:aws:logs:arn": "arn:aws:logs:ap-northeast-1:${data.aws_caller_identity.current.account_id}:*"
+                    "kms:EncryptionContext:aws:logs:arn": "arn:aws:logs:ap-northeast-1:590183849298:*"
                 }
             }
                }    
