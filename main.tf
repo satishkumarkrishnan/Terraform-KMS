@@ -9,24 +9,24 @@ terraform {
   }
 }
 #To create KMS resource 
-resource "aws_kms_key" "tokyo_kms_key" {
-  description             = "KMS key for Tokyo"
+resource "aws_kms_key" "ddsl_kms_key" {
+  description             = "KMS key for DDSL project"
   deletion_window_in_days = 10
   key_usage               = "ENCRYPT_DECRYPT"
   enable_key_rotation     = true
   tags = {
-    Name = "tokyo_kms_key"    
+    Name = "ddsl_kms_key"    
   }
 }
 #To create KMS Alias
-resource "aws_kms_alias" "tokyo_kms_key_alias" {
+resource "aws_kms_alias" "ddsl_kms_key_alias" {
   name          = "alias/kms_key"
-  target_key_id = aws_kms_key.tokyo_kms_key.key_id  
+  target_key_id = aws_kms_key.ddsl_kms_key.id  
 }
 
 #To create KMS Policy 
 resource "aws_kms_key_policy" "tokyo_kms_key_policy" {
-  key_id = aws_kms_key.tokyo_kms_key.arn
+  key_id = aws_kms_key.ddsl_kms_key.arn
   policy = jsonencode({
     "Version" = "2012-10-17"
     "Id" = "KMS policy"
@@ -35,7 +35,7 @@ resource "aws_kms_key_policy" "tokyo_kms_key_policy" {
             "Sid": "Enable IAM User Permissions",
             "Effect": "Allow",
             "Principal": {
-                "AWS": "arn:aws:iam::515149434592:root"
+                "AWS": "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
             },
             "Action": "kms:*",
             "Resource": "*"
@@ -55,11 +55,11 @@ resource "aws_kms_key_policy" "tokyo_kms_key_policy" {
             "Resource": "*",
             "Condition": {
                 "ArnLike": {
-                    "kms:EncryptionContext:aws:logs:arn": "arn:aws:logs:ap-northeast-1:515149434592:*"
+                    "kms:EncryptionContext:aws:logs:arn": "arn:aws:logs:ap-northeast-1:${data.aws_caller_identity.current.account_id}:*"
                 }
             }
-        }    
-    ]
+               }    
+                ]
    
   })
 }
